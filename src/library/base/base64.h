@@ -3,6 +3,8 @@
 
 #include <string>
 #include <vector>
+#include <cinttypes>
+#include <cstdio>
 
 #if _WIN32
 #include <wtypes.h>
