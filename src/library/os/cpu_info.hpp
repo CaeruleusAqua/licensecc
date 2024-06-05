@@ -8,6 +8,8 @@
 #ifndef SRC_LIBRARY_OS_CPU_INFO_H_
 #define SRC_LIBRARY_OS_CPU_INFO_H_
 #include <string>
+#include <cinttypes>
+#include <cstdio>
 namespace license {
 namespace os {
 
