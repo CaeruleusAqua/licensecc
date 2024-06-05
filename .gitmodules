@@ -1,5 +1,3 @@
 [submodule "license-generator"]
 	path = extern/license-generator
 	url = https://github.com/CaeruleusAqua/lcc-license-generator.git
-	branch = .
-	ignore = all
