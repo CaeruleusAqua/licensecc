@@ -190,12 +190,12 @@ IF(Doxygen_FOUND AND Sphinx_FOUND)
 ELSE(Doxygen_FOUND AND Sphinx_FOUND)
 	message(STATUS "Doxygen or Sphynx not found, not generating docs.")
 ENDIF(Doxygen_FOUND AND Sphinx_FOUND)
-install(DIRECTORY ${LCC_INCLUDE_DIR} DESTINATION include/${PROJECT_NAME})
-install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/include/ DESTINATION include)
-install(FILES src/cmake/licensecc-config.cmake DESTINATION ${pkg_config_dest})
+#install(DIRECTORY ${LCC_INCLUDE_DIR} DESTINATION include/${PROJECT_NAME})
+#install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/include/ DESTINATION include)
+#install(FILES src/cmake/licensecc-config.cmake DESTINATION ${pkg_config_dest})
 
-include(CMakePackageConfigHelpers)
-write_basic_package_version_file(${CMAKE_BINARY_DIR}/licensecc-config-version.cmake COMPATIBILITY SameMajorVersion)
-install(FILES ${CMAKE_BINARY_DIR}/licensecc-config-version.cmake DESTINATION ${pkg_config_dest})
+#include(CMakePackageConfigHelpers)
+#write_basic_package_version_file(${CMAKE_BINARY_DIR}/licensecc-config-version.cmake COMPATIBILITY SameMajorVersion)
+#install(FILES ${CMAKE_BINARY_DIR}/licensecc-config-version.cmake DESTINATION ${pkg_config_dest})
 
 
