@@ -5,7 +5,7 @@ ADD_LIBRARY(base OBJECT
     base64.cpp
     logger.cpp
 )
-
+set_property(TARGET base PROPERTY POSITION_INDEPENDENT_CODE ON)
 if(CODE_COVERAGE AND UNIX)
 	  MESSAGE(STATUS "Enabling code coverage")
 	  target_compile_options(base PUBLIC
