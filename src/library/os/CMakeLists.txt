@@ -34,6 +34,7 @@ ENDIF(UNIX OR OPENSSL_FOUND)
 
 #dependency of signature_verifier.cpp
 add_dependencies( os project_initialize )
+set_property(TARGET os PROPERTY POSITION_INDEPENDENT_CODE ON)
 
 if(CODE_COVERAGE AND UNIX)
 	  target_compile_options(os PUBLIC -O0 -g --coverage)
