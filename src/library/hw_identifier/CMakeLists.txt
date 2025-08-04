@@ -6,6 +6,7 @@ add_library(hw_identifier OBJECT
 	identification_strategy.cpp
 	hw_identifier.cpp
 )
+set_property(TARGET hw_identifier PROPERTY POSITION_INDEPENDENT_CODE ON)
 
 if(CODE_COVERAGE AND UNIX)
 	  target_compile_options(hw_identifier PUBLIC -O0 -g --coverage)
