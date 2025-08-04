@@ -44,6 +44,7 @@ target_include_directories(licensecc_static
 add_library(licensecc::licensecc_static ALIAS licensecc_static)
 install(TARGETS licensecc_static EXPORT licensecc
 	ARCHIVE DESTINATION ${main_lib_dest}/${LCC_PROJECT_NAME})
+ set_property(TARGET licensecc::licensecc_static PROPERTY POSITION_INDEPENDENT_CODE ON)
 	
 install(EXPORT licensecc NAMESPACE licensecc:: DESTINATION  ${main_lib_dest}/${LCC_PROJECT_NAME}/cmake)
 export(EXPORT licensecc NAMESPACE licensecc:: FILE ${CMAKE_BINARY_DIR}/${PROJECT_NAME}.cmake)
