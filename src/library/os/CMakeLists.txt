@@ -33,7 +33,10 @@ ELSE(UNIX OR OPENSSL_FOUND)
 ENDIF(UNIX OR OPENSSL_FOUND)
 
 #dependency of signature_verifier.cpp
-add_dependencies( os project_initialize )
+IF(LINCENSECC_BUILD_GENERATOR)
+	add_dependencies(os project_initialize)
+ENDIF(LINCENSECC_BUILD_GENERATOR)
+
 set_property(TARGET os PROPERTY POSITION_INDEPENDENT_CODE ON)
 
 if(CODE_COVERAGE AND UNIX)
