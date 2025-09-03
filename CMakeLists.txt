@@ -2,6 +2,9 @@ cmake_minimum_required(VERSION 3.6 FATAL_ERROR)
 
 SET(LICENSECC_SHORT_LICENSE "BSD Software License")
 
+option(LINCENSECC_BUILD_TESTS "Should tests be build" OFF)
+option(LINCENSECC_BUILD_GENERATOR "Should license generator be build" OFF)
+
 SET(CMAKE_DISABLE_SOURCE_CHANGES OFF) #keys are generated in the source tree by default
 SET(CMAKE_DISABLE_IN_SOURCE_BUILD ON)
 
@@ -26,10 +29,14 @@ set(PROJECT_DESCRIPTION "Copy protection and licensing library")
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 SET(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_CURRENT_SOURCE_DIR}/cmake/")
-option(LINCENSECC_BUILD_TESTS "Should tests be build" OFF)
 
-#find lccgen executable or build it.
-find_package(lccgen REQUIRED) 
+IF(LINCENSECC_BUILD_GENERATOR)
+	message("Building with license generator")
+	#find lccgen executable or build it.
+	find_package(lccgen REQUIRED)
+ELSE(LINCENSECC_BUILD_GENERATOR)
+	message("Building without license generator")
+ENDIF(LINCENSECC_BUILD_GENERATOR)
 
 #In case the build system doesn't support binfmt misc
 IF( ( CMAKE_HOST_SYSTEM_NAME STREQUAL "Linux" ) AND CMAKE_CROSSCOMPILING AND NOT DEFINED CMAKE_CROSSCOMPILING_EMULATOR )
@@ -112,11 +119,13 @@ set(LCC_INCLUDE_DIR "${LCC_PROJECTS_BASE_DIR}/${LCC_PROJECT_NAME}/include/${PROJ
 set(LCC_PROJECT_PUBLIC_KEY "${LCC_INCLUDE_DIR}/public_key.h" )
 set(LCC_PROJECT_PRIVATE_KEY "${LCC_PROJECTS_BASE_DIR}/${LCC_PROJECT_NAME}/private_key.rsa" )
 
-add_custom_target(project_initialize
-  COMMAND license_generator::lccgen project initialize -t "${PROJECT_SOURCE_DIR}/src/templates" -n "${LCC_PROJECT_NAME}" -p "${LCC_PROJECTS_BASE_DIR}"
-  COMMENT "generating ${LCC_PROJECT_PUBLIC_KEY} and ${LCC_PROJECT_PRIVATE_KEY} if they don't already exist"
-  USES_TERMINAL
-)
+IF(LINCENSECC_BUILD_GENERATOR)
+	add_custom_target(project_initialize
+	  COMMAND license_generator::lccgen project initialize -t "${PROJECT_SOURCE_DIR}/src/templates" -n "${LCC_PROJECT_NAME}" -p "${LCC_PROJECTS_BASE_DIR}"
+	  COMMENT "generating ${LCC_PROJECT_PUBLIC_KEY} and ${LCC_PROJECT_PRIVATE_KEY} if they don't already exist"
+	  USES_TERMINAL
+	)
+ENDIF(LINCENSECC_BUILD_GENERATOR)
 
 include_directories( ${LCC_INCLUDE_DIR} "${CMAKE_CURRENT_SOURCE_DIR}/include" )
 
